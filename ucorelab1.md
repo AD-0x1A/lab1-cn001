@@ -164,7 +164,7 @@ x /5i $pc
 ```
 与`bootasm.S`和`bootblock.asm`对比后发现一致
 
-**总结：通过联合qemu和gdb对函数进行调试**
+**总结：通过联合qemu和gdb对函数进行调试，了解到执行BIOS前一个长跳转指令，并学会断点调试，单步追踪，初步了解系统启动的汇编语言**
 ## 练习3 分析bootloader进入保护模式的过程
 * 关闭中断，将各个寄存器都置为0
 ```py
@@ -227,6 +227,7 @@ movl $start, %esp
 ```
 call bootmain
 ```
+**总结：本练习详细分析了系统进入保护模式的详细过程，主要对寄存器进行了操作**
 ## 练习4 分析bootloader加载ELF格式的OS的过程
 >1. bootloader如何读取硬盘扇区的？
 >2. bootloader是如何加载 ELF格式的 OS？  
@@ -304,7 +305,6 @@ readsect(void *dst, uint32_t secno) {
     insl(0x1F0, dst, SECTSIZE / 4);
 }
 ```
-
 ## 练习5 实现函数调用堆栈跟踪函数 我们需要在lab1中完成`kdebug.c`中函数`print_stackframe`的实现
 * 首先查看`kern/debug/kdebug.c`代码中`print_stackframe`函数的注释：
 ```c
@@ -345,6 +345,8 @@ void print_stackframe(void) {
 >ebp：其对应的是第一个使用堆栈的函数，bootmain.c中的bootmain的地址    
 eip=ebp+4：caller调用bootmain函数时的地址  
 ebp+8等：是可能存在的参数
+
+**总结：本练习利用`print_stackframe`函数跟踪了函数的跳转，采用堆栈的形式，最后找到调用的第一个函数`bootmain`的地址**
 ## 练习6 完善中断初始化和处理
 ## 练习6-1 中断向量表中一个表项占多少字节？其中哪几位代表中断处理代码的入口？
 中断描述符表一个表项占8字节。其中0~15位和48~63位分别为offset的低16位和高16位。16~31位为段选择子。通过段选择子获得段基址，加上段内偏移量即可得到中断处理代码的入口
@@ -412,3 +414,4 @@ ticks ++;
 ```
 在lab下输入`make qemu`命令
 ![]
+**总结：本练习主要利用`print_ticks()`函数实现中断的实现，首先对中断向量表进行初始化，然后利用时钟作为中断的条件，当经过100个时钟周期时，便在屏幕上回显信息**
