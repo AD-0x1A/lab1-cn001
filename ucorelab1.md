@@ -413,5 +413,5 @@ ticks ++;
         }
 ```
 在lab下输入`make qemu`命令  
-![](https://github.com/AD-0x1A/lab1-cn001/blob/master/lab1%E5%9B%BE%E7%89%87/4-1.png)
+![](https://github.com/AD-0x1A/lab1-cn001/blob/master/lab1%E5%9B%BE%E7%89%87/4-1.png)  
 **总结：本练习主要利用`print_ticks()`函数实现中断的实现，首先对中断向量表进行初始化，然后利用时钟作为中断的条件，当经过100个时钟周期时，便在屏幕上回显信息**
