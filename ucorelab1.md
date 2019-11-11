@@ -132,7 +132,7 @@ set architecture i8086
 ```
 并在lab1的目录下执行`make debug`，会执行一条`qemu`命令和一条`gdb`命令，输入`stepi`可以一步一步跟踪BIOS  
 **调试的代码地址要加上段基地址**
-![]
+![](https://github.com/AD-0x1A/lab1-cn001/blob/master/lab1%E5%9B%BE%E7%89%87/1-1.png)
 ## 练习2-2 在初始化位置0x7c04设置实地址断点,测试断点正常
 修改`lab1/tools/gdbinit`文件为
 ```c
@@ -149,7 +149,7 @@ x /5i $pc
 4. b代表break设置断点为*0x7c05
 5. x代表显示 i代表指令 $pc代表寄存器
 在lab1目录下执行`make debug`，可得到如下结果：
-![]
+![](https://github.com/AD-0x1A/lab1-cn001/blob/master/lab1%E5%9B%BE%E7%89%87/2-1.png)
 ## 练习2-3 从0x7c04开始跟踪代码运行,将单步跟踪反汇编得到的代码与`bootasm.S`和`bootblock.asm`进行比较
 跟踪代码如下：
 ```c
@@ -340,7 +340,7 @@ void print_stackframe(void) {
       }
 }
 ```
-![]
+![](https://github.com/AD-0x1A/lab1-cn001/blob/master/lab1%E5%9B%BE%E7%89%87/3-1.png)
 输出与指导书类似，最后一行数值含义：
 >ebp：其对应的是第一个使用堆栈的函数，bootmain.c中的bootmain的地址    
 eip=ebp+4：caller调用bootmain函数时的地址  
@@ -412,6 +412,6 @@ ticks ++;
             print_ticks();
         }
 ```
-在lab下输入`make qemu`命令
-![]
+在lab下输入`make qemu`命令  
+![](https://github.com/AD-0x1A/lab1-cn001/blob/master/lab1%E5%9B%BE%E7%89%87/4-1.png)
 **总结：本练习主要利用`print_ticks()`函数实现中断的实现，首先对中断向量表进行初始化，然后利用时钟作为中断的条件，当经过100个时钟周期时，便在屏幕上回显信息**
